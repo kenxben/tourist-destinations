@@ -1,0 +1,36 @@
+---
+title: "Tourist destinations"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    vertical_layout: fill
+---
+
+```{r setup, include=FALSE}
+library(flexdashboard)
+library(d3heatmap)
+library(DT)
+
+clusters <- read.csv("results/clusters.csv", row.names = 2, encoding = 'latin1')
+names(clusters)
+```
+
+Column {data-width=600}
+-----------------------------------------------------------------------
+
+### Destinations by attribute value
+
+```{r}
+d3heatmap(clusters[2:9], scale = "column", dendrogram = 'none', xaxis_font_size = '8pt', colors = 'GnBu')
+```
+
+Column {data-width=400}
+-----------------------------------------------------------------------
+
+### Data table
+
+```{r}
+datatable(clusters[2:9]) %>%
+  formatRound(names(clusters)[2:9], 2)
+```
+
