@@ -6,6 +6,8 @@ Jungle, Andes, beaches, Galapagos. Given its unique location and geography, Ecua
 In this project, tourist destinations in Ecuador are identified from tourism attractions data scrapped from a trip recommendations site. The tourist destinations are then scored for their attributes, lodging availability and clustered by distance.
 Results could be used to automatically design custom trips given a set of preferences.
 
+![Destinations heatmap chart](https://github.com/kenxben/tourist-destinations/blob/master/media/heatmap_chart.png?raw=true)
+
 ## Data
 Besides from scrapped data, other data sources are:
 
