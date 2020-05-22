@@ -1,5 +1,5 @@
 ---
-title: "Tourist destinations"
+title: "DNA of Tourist destinations"
 output: 
   flexdashboard::flex_dashboard:
     orientation: columns
@@ -10,27 +10,42 @@ output:
 library(flexdashboard)
 library(d3heatmap)
 library(DT)
+library(factoextra)
 
-clusters <- read.csv("results/clusters.csv", row.names = 2, encoding = 'latin1')
-names(clusters)
-```
+destinations <- read.csv("results/clusters.csv", row.names = 2, encoding = 'latin1')
+names(destinations)
 
-Column {data-width=600}
------------------------------------------------------------------------
+cluster_viz <- readRDS("results/kmeans_viz.rds")
 
-### Destinations by attribute value
-
-```{r}
-d3heatmap(clusters[2:9], scale = "column", dendrogram = 'none', xaxis_font_size = '8pt', colors = 'GnBu')
 ```
 
 Column {data-width=400}
 -----------------------------------------------------------------------
 
+### Similar destinations (k-means)
+
+```{r}
+cluster_viz
+```
+
+
+Column {data-width=600}
+-----------------------------------------------------------------------
+
+### Comparing Tourist Destinations in Ecuador by their attraction's types
+
+```{r}
+d3heatmap(t(destinations[2:9]), scale = "column", dendrogram = 'none', 
+          xaxis_font_size = '8pt',
+          yaxis_font_size = '10pt',
+          colors = 'GnBu')
+```
+
+
 ### Data table
 
 ```{r}
-datatable(clusters[2:9]) %>%
-  formatRound(names(clusters)[2:9], 2)
+datatable(destinations[2:9]) %>%
+  formatRound(names(destinations)[2:9], 2)
 ```
 
